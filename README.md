@@ -175,7 +175,7 @@ El proyecto cuenta con **18 pruebas automatizadas** distribuidas en tres capas. 
 |------|-----------|----------|---------|
 | Backend | JUnit 5 + Mockito | 4 | `mvn test` |
 | Frontend unit | Jest + RTL | 8 | `npm test` |
-| E2E | Playwright | 6 | `npm run test:e2e` |
+| E2E | Playwright | 8 | `npm run test:e2e` |
 
 ## 📱 Uso del Sistema
 

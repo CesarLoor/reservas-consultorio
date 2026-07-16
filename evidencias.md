@@ -1,6 +1,6 @@
 # 🧪 Evidencias de Pruebas
 
-**Total: 18 pruebas** (4 backend + 8 frontend unit + 6 E2E)
+**Total: 20 pruebas** (4 backend + 8 frontend unit + 8 E2E)
 
 ---
 
@@ -70,7 +70,7 @@ npm run test:unit        # Una sola ejecución
 
 ---
 
-## Frontend — Pruebas E2E (Playwright) — 6 pruebas
+## Frontend — Pruebas E2E (Playwright) — 8 pruebas
 
 Simulan la interacción real del usuario en el navegador, incluyendo validación de formularios, llamadas a la API (interceptadas) y navegación entre rutas.
 
@@ -79,11 +79,9 @@ cd frontend
 npm run test:e2e
 ```
 
-- **Framework:** Playwright
-- **Navegador:** Chromium (headless)
-- **Ubicación:** `frontend/e2e/login.spec.js`
+### login.spec.js — 6 pruebas
 
-### Escenarios
+Ubicación: `frontend/e2e/login.spec.js`
 
 | Prueba | Descripción |
 |--------|-------------|
@@ -94,17 +92,26 @@ npm run test:e2e
 | `muestra mensaje de error con credenciales incorrectas` | Intercepta la petición `POST /api/auth/login` con código 401, llena credenciales, envía y verifica que se muestre el toast "Credenciales incorrectas" |
 | `login exitoso redirige al dashboard` | Intercepta la petición `POST /api/auth/login` con código 200 y datos de usuario válidos, llena credenciales, envía y verifica el toast "Bienvenido al sistema" y la redirección a `/dashboard` |
 
+### reservas.spec.js — 2 pruebas
+
+Ubicación: `frontend/e2e/reservas.spec.js`
+
+| Prueba | Descripción |
+|--------|-------------|
+| `inicia sesion como administrador y muestra el resumen` | Inicia sesión como admin, verifica redirección a `/dashboard` y que se muestren el nombre del admin, "Total Reservas" y la tabla de "Reservas Recientes" |
+| `confirma una reserva pendiente desde el panel administrativo` | Inicia sesión, navega a la gestión de reservas, confirma una reserva pendiente y verifica que el estado cambie a "Confirmada" y aparezca el toast "Reserva confirmada" |
+
 ### Configuración de Playwright
 
 Archivo: `frontend/playwright.config.js`
 
-- **Servidor web:** Lanza automáticamente `npm start` en el puerto `3100` con `BROWSER=none`
-- **Base URL:** `http://127.0.0.1:3100`
+- **Servidor web:** Comentado — se espera que el servidor de desarrollo esté corriendo previamente en el puerto `3000`
+- **Base URL:** `http://localhost:3000`
 - **Proyectos:** Chromium (Desktop Chrome)
 - **Workers:** 4 en paralelo
 - **Trace:** Solo en primer reintento (`on-first-retry`)
-- **Timeout del servidor:** 120 segundos
-- **Reutilización:** El servidor se reusa entre ejecuciones si ya está corriendo
+- **Timeout:** 30 segundos por prueba
+- **Intercepción:** Las peticiones a `http://localhost:8080/api/**` se interceptan para no depender del backend real
 
 ### Requisitos
 
@@ -122,5 +129,5 @@ npx playwright install chromium
 |------|----------|-----------|---------|
 | Backend | Java | JUnit 5 + Mockito | 4 |
 | Frontend unit | JavaScript | Jest + React Testing Library | 8 |
-| E2E | JavaScript | Playwright | 6 |
-| **Total** | | | **18** |
+| E2E | JavaScript | Playwright | 8 |
+| **Total** | | | **20** |

@@ -1,9 +1,3 @@
--- Crear base de datos
-CREATE DATABASE reservas_db;
-
--- Usar la base de datos
-\c reservas_db;
-
 -- Tabla de usuarios
 CREATE TABLE usuarios (
     id_usuario BIGSERIAL PRIMARY KEY,

@@ -6,6 +6,7 @@ module.exports = defineConfig({
   expect: {
     timeout: 5000,
   },
+  fullyParallel: true,
   reporter: [['list']],
   use: {
     baseURL: 'http://localhost:3000',
@@ -18,7 +19,6 @@ module.exports = defineConfig({
     timeout: 120000,
     env: {
       BROWSER: 'none',
-      DANGEROUSLY_DISABLE_HOST_CHECK: 'true',
       PORT: '3000',
     },
   },

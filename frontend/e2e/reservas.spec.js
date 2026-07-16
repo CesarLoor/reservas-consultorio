@@ -94,7 +94,7 @@ test('inicia sesion como administrador y muestra el resumen', async ({ page }) =
   await expect(page).toHaveURL(/\/dashboard$/);
   await expect(page.getByText('Admin E2E')).toBeVisible();
   await expect(page.getByText('Total Reservas')).toBeVisible();
-  await expect(page.getByText('Reservas Recientes')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Reservas Recientes' }).first()).toBeVisible();
 });
 
 test('confirma una reserva pendiente desde el panel administrativo', async ({ page }) => {
@@ -163,15 +163,16 @@ test('confirma una reserva pendiente desde el panel administrativo', async ({ pa
 
   await expect(page).toHaveURL(/\/dashboard$/);
   await page.getByRole('button', { name: 'Reservas' }).click();
-  await expect(page.getByText(/Gesti.n de Reservas/)).toBeVisible();
-  await expect(page.getByText('Elena Torres')).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Gesti.n de Reservas/ }).first()).toBeVisible();
+  const reservasTable = page.getByRole('table');
+  await expect(reservasTable.getByText('Elena Torres')).toBeVisible();
 
-  await page.getByRole('button', { name: 'Confirmar' }).click();
+  await reservasTable.getByRole('button', { name: 'Confirmar' }).click();
 
   await expect(page.getByText('Reserva confirmada')).toBeVisible();
   expect(confirmacionSolicitada).toEqual({
     emailGestor: 'admin@reservas.com',
     authorization: 'Bearer admin-token-confirmacion',
   });
-  await expect(page.getByText('Confirmada')).toBeVisible();
+  await expect(reservasTable.getByText('Confirmada')).toBeVisible();
 });

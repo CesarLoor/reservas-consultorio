@@ -22,6 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:unit": "react-scripts test --watchAll=false",
+    "test:e2e": "playwright test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@testing-library/react": "^14.0.0",

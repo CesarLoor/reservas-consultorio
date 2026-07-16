@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS permisos_usuario (
 );
 
 -- Insertar usuario administrador por defecto
-INSERT INTO usuarios (nombre, telefono, email, rol, password, activo) 
+INSERT INTO usuarios (nombre, telefono, email, rol, password, activo)
 VALUES ('Administrador', '1234567890', 'admin@reservas.com', 'ADMINISTRADOR', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', true)
 ON CONFLICT (email) DO NOTHING;
 

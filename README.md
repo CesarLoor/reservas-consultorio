@@ -169,70 +169,13 @@ El frontend estará disponible en: `http://localhost:3000`
 
 ## 🧪 Pruebas
 
-El proyecto incluye tres capas de pruebas automatizadas: unitarias en backend y frontend, y pruebas E2E con Playwright.
+El proyecto cuenta con **18 pruebas automatizadas** distribuidas en tres capas. Ver detalle completo en [`evidencias.md`](evidencias.md).
 
-### Backend — Pruebas Unitarias (JUnit 5 + Mockito)
-
-Prueban la lógica de negocio de los servicios aislándola de la base de datos mediante mocks.
-
-```bash
-cd backend
-mvn test
-```
-
-- **Framework:** JUnit 5 + Mockito
-- **Ubicación:** `backend/src/test/java/com/reservas/service/`
-- **Pruebas incluidas:**
-  - `ServicioServiceTest` — Creación y listado de servicios
-  - `ReservaServiceTest` — Confirmación y rechazo de reservas
-
-### Frontend — Pruebas Unitarias (Jest + React Testing Library)
-
-Prueban componentes React y la capa de servicios Axios.
-
-```bash
-cd frontend
-npm test                 # Modo interactivo (watch)
-npm run test:unit        # Una sola ejecución
-```
-
-- **Framework:** Jest + React Testing Library
-- **Ubicación:** `frontend/src/__tests__/`
-- **Pruebas incluidas:**
-  - `App.test.js` — Renderizado del login y validación de campos obligatorios
-  - `api.test.js` — Llamadas a la API (servicios y reservas)
-  - `ReservaForm.test.js` — Flujo completo del formulario de reservas
-
-### Frontend — Pruebas E2E (Playwright)
-
-Simulan la interacción real del usuario en el navegador, incluyendo validación de formularios, llamadas a la API (interceptadas) y navegación entre rutas.
-
-```bash
-cd frontend
-npm run test:e2e
-```
-
-- **Framework:** Playwright
-- **Navegador:** Chromium (headless)
-- **Ubicación:** `frontend/e2e/login.spec.js`
-- **Pruebas incluidas:**
-  - Renderizado de la pantalla de inicio de sesión
-  - Validación de campos vacíos
-  - Validación de formato de email inválido
-  - Toggle de visibilidad de contraseña
-  - Mensaje de error con credenciales incorrectas
-  - Redirección al dashboard tras login exitoso
-
-**Configuración** (`frontend/playwright.config.js`):
-- Lanza automáticamente el servidor de desarrollo en el puerto `3100`
-- Intercepta las peticiones a la API (`/api/auth/login`) para evitar depender del backend
-- Los tests se ejecutan en paralelo con 4 workers
-
-**Requisitos:** Las dependencias de Playwright se instalan automáticamente con `npm install`. Para instalar los navegadores manualmente:
-
-```bash
-npx playwright install chromium
-```
+| Capa | Framework | Cantidad | Comando |
+|------|-----------|----------|---------|
+| Backend | JUnit 5 + Mockito | 4 | `mvn test` |
+| Frontend unit | Jest + RTL | 8 | `npm test` |
+| E2E | Playwright | 6 | `npm run test:e2e` |
 
 ## 📱 Uso del Sistema
 
